@@ -1,6 +1,8 @@
 {
   "name": "appointment-asap",
-  "app_id": "",
+  "app_id": "e7688c67",
   "type": "ionic-angular",
-  "integrations": {}
+  "integrations": {
+    "cordova": {}
+  }
 }

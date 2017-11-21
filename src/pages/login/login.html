@@ -1,0 +1,25 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-list>
+    <ion-item class="text" *ngFor="let user of users | async">
+      {{ user | json }}
+    </ion-item>
+  </ion-list>
+
+    <h1>Hello {{ displayName }}</h1>
+    <img *ngIf="photoUrl"  [src]="photoUrl" alt="">
+
+
+  <button ion-button outline (click)="signInWithFacebook()">Facebook Login</button>
+  <button ion-button outline (click)="signInWithGoogle()">Google Login</button>
+  <button ion-button outline (click)="signOut()">Logout</button>
+</ion-content>
