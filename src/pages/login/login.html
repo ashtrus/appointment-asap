@@ -9,17 +9,20 @@
 
 <ion-content padding>
 
-  <ion-list>
-    <ion-item class="text" *ngFor="let user of users | async">
-      {{ user | json }}
-    </ion-item>
-  </ion-list>
+  <ion-buttons>
 
-    <h1>Hello {{ displayName }}</h1>
-    <img *ngIf="photoUrl"  [src]="photoUrl" alt="">
+    <button ion-button full
+      (click)="loginWithFacebook()" id="btn-facebook">
+      <ion-icon name="logo-facebook" padding-right></ion-icon>
+      Login with Facebook
+    </button>
 
+    <button ion-button full
+      (click)="loginWithGoogle()" id="btn-google">
+      <ion-icon name="logo-google" padding-right></ion-icon>
+      Login with Google
+    </button>
 
-  <button ion-button outline (click)="signInWithFacebook()">Facebook Login</button>
-  <button ion-button outline (click)="signInWithGoogle()">Google Login</button>
-  <button ion-button outline (click)="signOut()">Logout</button>
+  </ion-buttons>
+
 </ion-content>

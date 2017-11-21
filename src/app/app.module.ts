@@ -56,6 +56,7 @@ export const firebaseConfig = {
   providers: [
     AngularFireDatabase,
     Facebook,
+    LoginServiceProvider,
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
