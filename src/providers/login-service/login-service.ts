@@ -51,8 +51,12 @@ export class LoginServiceProvider {
     this.afAuth.auth.signOut();
   }
 
-  getUser() {
+  isAuth() {
     return this.afAuth.authState;
+  }
+
+  getUser() {
+    return this.afAuth.auth.currentUser;
   }
 
 }

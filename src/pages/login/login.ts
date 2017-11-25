@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 
-import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { LoginServiceProvider } from '../../providers/login-service/login-service';
 
@@ -10,13 +9,7 @@ import { LoginServiceProvider } from '../../providers/login-service/login-servic
 })
 export class LoginPage {
 
-  constructor(
-    public afDB: AngularFireDatabase,
-    public loginService: LoginServiceProvider,
-  ) {}
-
-  ionViewDidLoad() {
-  }
+  constructor(public loginService: LoginServiceProvider) {}
 
   loginWithFacebook() {
     this.loginService.signInWithFacebook();
