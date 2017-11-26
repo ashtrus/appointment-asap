@@ -30,4 +30,30 @@
 
   </ion-item>
 
+  <ion-list>
+
+    <ion-item *ngFor="let item of items | async">
+
+      <ion-thumbnail item-start>
+        <img src="http://lorempixel.com/100/100/cats">
+      </ion-thumbnail>
+
+      <ion-label floating>Item text</ion-label>
+      <ion-input type="text" #updatetext [value]="item.text"></ion-input>
+
+      <button ion-button item-end color="light" (click)="updateItem(item.key, updatetext.value)">Update</button>
+      <button ion-button item-end color="danger" (click)="deleteItem(item.key)">X</button>
+
+    </ion-item>
+
+  </ion-list>
+
+  <ion-item>
+    <ion-label floating>New item</ion-label>
+    <ion-input type="text" #newitem></ion-input>
+  </ion-item>
+
+  <button ion-button color="primary" (click)="addItem(newitem.value)">Add</button>
+  <button ion-button color="danger" (click)="deleteEverything()">Delete All</button>
+
 </ion-content>
