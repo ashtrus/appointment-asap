@@ -18,4 +18,8 @@ export class LoginPage {
   loginWithGoogle() {
     this.loginService.signInWithGoogle();
   }
+
+  loginBusinessAccount() {
+    console.log('business login');
+  }
 }
