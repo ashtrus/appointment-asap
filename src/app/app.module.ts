@@ -8,6 +8,7 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
+import { SettingsPage } from '../pages/home/settings/settings';
 import { ModalFiltersPage } from '../pages/home/modal-filters';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -37,7 +38,8 @@ export const firebaseConfig = {
     HomePage,
     LoginPage,
     TabsPage,
-    ModalFiltersPage
+    ModalFiltersPage,
+    SettingsPage
   ],
   imports: [
     AngularFireModule.initializeApp(firebaseConfig),
@@ -54,7 +56,8 @@ export const firebaseConfig = {
     HomePage,
     LoginPage,
     TabsPage,
-    ModalFiltersPage
+    ModalFiltersPage,
+    SettingsPage
   ],
   providers: [
     AngularFireDatabase,

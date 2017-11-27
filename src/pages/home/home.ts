@@ -4,8 +4,10 @@ import { AlertController, ModalController, NavController, NavParams } from 'ioni
 import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 
-import { LoginServiceProvider } from "../../providers/login-service/login-service";
 import { ModalFiltersPage } from './modal-filters';
+import { SettingsPage } from './settings/settings';
+
+import { LoginServiceProvider } from "../../providers/login-service/login-service";
 
 @Component({
   selector: 'page-home',
@@ -21,6 +23,7 @@ export class HomePage {
     private alertCtrl: AlertController,
     private loginService: LoginServiceProvider,
     public modalCtrl: ModalController,
+    public navCtrl: NavController,
     private navParams: NavParams
   ) {
 
@@ -62,7 +65,7 @@ export class HomePage {
     return this.loginService.getUser();
   }
 
-  private logOut() {
-    this.loginService.signOut();
+  private openSettingsPage() {
+    this.navCtrl.push(SettingsPage);
   }
 }

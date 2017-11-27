@@ -12,27 +12,16 @@
         <ion-icon name="funnel"></ion-icon>
       </button>
 
+      <button ion-button icon-only item-start (click)="openSettingsPage()">
+        <ion-icon name="settings"></ion-icon>
+      </button>
+
     </ion-buttons>
 
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-
-  <ion-item *ngIf="getUser()">
-
-    <ion-thumbnail item-start>
-      <img [src]="getUser().photoURL" alt="">
-    </ion-thumbnail>
-
-    <h2>{{ getUser().displayName }}</h2>
-    <p>{{ getUser().email }}</p>
-
-    <button ion-button clear icon-only item-end (click)="logOut()">
-      <ion-icon name="log-out"></ion-icon>
-    </button>
-
-  </ion-item>
 
   <ion-list>
 

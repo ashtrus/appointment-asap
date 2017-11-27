@@ -1,0 +1,68 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Settings</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-list>
+
+    <button ion-item (click)="howItWorks()">
+      How it works
+    </button>
+
+    <button ion-item (click)="openNotifications()">
+      Notifications
+    </button>
+
+
+    <ion-item-divider color="light"></ion-item-divider>
+
+    <button ion-item (click)="contactUs()">
+      Contact us
+    </button>
+
+    <button ion-item (click)="findUsOnFacebook()">
+      Find us on Facebook
+    </button>
+
+    <button ion-item (click)="followOnInstagram()">
+      Follow us on Instagram
+    </button>
+
+    <button ion-item (click)="joinUs()">
+      Join Appointment ASAP
+    </button>
+
+
+    <ion-item-divider color="light"></ion-item-divider>
+
+    <ion-item *ngIf="getUser()">
+
+      <ion-thumbnail item-start>
+        <img [src]="getUser().photoURL" alt="">
+      </ion-thumbnail>
+
+      <h2>{{ getUser().displayName }}</h2>
+      <p>{{ getUser().email }}</p>
+
+      <button ion-button clear item-end (click)="getProfile()">
+        <ion-icon name="contact"></ion-icon>
+      </button>
+
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Log out</ion-label>
+      <button ion-button clear icon-only item-end (click)="logOut()">
+        <ion-icon name="log-out"></ion-icon>
+      </button>
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>
