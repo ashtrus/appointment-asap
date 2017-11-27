@@ -7,7 +7,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding no-bounce>
 
   <ion-buttons>
 
@@ -21,6 +21,11 @@
       (click)="loginWithGoogle()" id="btn-google">
       <ion-icon name="logo-google" padding-right></ion-icon>
       Login with Google
+    </button>
+
+    <button ion-button block outline
+      (click)="loginBusinessAccount()" id="btn-business">
+      Business Login
     </button>
 
   </ion-buttons>
