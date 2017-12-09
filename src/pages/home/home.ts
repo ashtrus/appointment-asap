@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AlertController, ModalController, NavController, NavParams } from 'ionic-angular';
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
@@ -17,10 +18,12 @@ export class HomePage {
 
   itemsRef: AngularFireList<any>;
   items: Observable<any[]>;
+  private createAppointmentForm: FormGroup;
 
   constructor(
     private afDB: AngularFireDatabase,
     private alertCtrl: AlertController,
+    private formBuilder: FormBuilder,
     private loginService: LoginServiceProvider,
     public modalCtrl: ModalController,
     public navCtrl: NavController,
@@ -36,6 +39,14 @@ export class HomePage {
 
   }
 
+  public ngOnInit() {
+    this.createAppointmentForm = this.formBuilder.group({
+      title: ["", Validators.required ],
+      description: ["", Validators.required ],
+      price: ["", Validators.required ],
+    });
+  }
+
   private openFiltersModal() {
     let modal = this.modalCtrl.create(ModalFiltersPage);
     modal.present();
@@ -45,8 +56,9 @@ export class HomePage {
   //   this.usersRef = this.afDB.list('users').valueChanges();
   // }
 
-  private addItem(newName: string) {
-    this.itemsRef.push({ text: newName });
+  private addAppointment() {
+    this.itemsRef.push(this.createAppointmentForm.value);
+    this.createAppointmentForm.reset();
   }
 
   private updateItem(key: string, newText: string) {
