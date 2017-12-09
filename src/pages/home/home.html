@@ -1,45 +1,58 @@
 <ion-header>
   <ion-navbar>
+
+    <ion-buttons start>
+      <button ion-button icon-only (click)="openFiltersModal()">
+        <ion-icon name="funnel"></ion-icon>
+      </button>
+    </ion-buttons>
+
     <ion-title>Home</ion-title>
 
     <ion-buttons end>
-
-      <button ion-button icon-only item-end (click)="logOut()">
-        <ion-icon name="log-out"></ion-icon>
-      </button>
-
-      <button ion-button icon-only item-start (click)="openFiltersModal()">
-        <ion-icon name="funnel"></ion-icon>
-      </button>
-
-      <button ion-button icon-only item-start (click)="openSettingsPage()">
+      <button ion-button icon-only (click)="openSettingsPage()">
         <ion-icon name="settings"></ion-icon>
       </button>
-
     </ion-buttons>
 
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content no-bounce>
+  <ion-grid no-padding>
 
-  <ion-list>
+    <h1>Categories</h1>
+    <ion-row nowrap id="categories">
 
-    <ion-item *ngFor="let item of items | async">
+      <div ion-col col-3 *ngFor="let item of items | async">
+        <img src="/assets/imgs/salon3.jpg" />
+        <h2>{{ item.text | titlecase }}</h2>
+      </div>
 
-      <ion-thumbnail item-start>
-        <img src="http://lorempixel.com/100/100/cats">
-      </ion-thumbnail>
+    </ion-row>
 
-      <ion-label floating>Item text</ion-label>
-      <ion-input type="text" #updatetext [value]="item.text"></ion-input>
 
-      <button ion-button item-end color="light" (click)="updateItem(item.key, updatetext.value)">Update</button>
-      <button ion-button item-end color="danger" (click)="deleteItem(item.key)">X</button>
+    <h1>Featured</h1>
+    <ion-card *ngFor="let item of items | async">
 
-    </ion-item>
+      <img src="/assets/imgs/salon1.jpg">
 
-  </ion-list>
+      <div class="header">
+        <p>200 m</p>
+        <p>30 DKK</p>
+      </div>
+
+      <h2 class="title">{{ item.text | titlecase }}</h2>
+
+      <div ion-item class="info">
+        <p>Available: 16:00 - 18:00</p>
+        <button ion-button clear icon-only item-end>
+          <ion-icon name="heart-outline"></ion-icon>
+        </button>
+      </div>
+
+    </ion-card>
+  </ion-grid>
 
   <ion-item>
     <ion-label floating>New item</ion-label>
