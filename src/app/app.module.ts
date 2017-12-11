@@ -4,10 +4,14 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
 import { AboutPage } from '../pages/about/about';
+import { BusinessHomePage } from "../pages/business/home/home";
+import { BusinessLoginPage } from '../pages/login/business/business';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
-import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
+import { TabsBusinessPage } from "../pages/tabs-business/tabs";
+import { TabsPage } from '../pages/tabs/tabs';
+import { ReceiptsPage } from "../pages/business/receipts/receipts";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -32,9 +36,13 @@ export const firebaseConfig = {
   declarations: [
     MyApp,
     AboutPage,
+    BusinessHomePage,
+    BusinessLoginPage,
     ContactPage,
     HomePage,
     LoginPage,
+    ReceiptsPage,
+    TabsBusinessPage,
     TabsPage
   ],
   imports: [
@@ -48,9 +56,13 @@ export const firebaseConfig = {
   entryComponents: [
     MyApp,
     AboutPage,
+    BusinessHomePage,
+    BusinessLoginPage,
     ContactPage,
     HomePage,
     LoginPage,
+    ReceiptsPage,
+    TabsBusinessPage,
     TabsPage
   ],
   providers: [

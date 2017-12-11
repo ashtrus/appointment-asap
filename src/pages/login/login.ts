@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-
+import { NavController } from "ionic-angular";
 import { Observable } from 'rxjs/Observable';
+
+import { BusinessLoginPage } from './business/business';
 import { LoginServiceProvider } from '../../providers/login-service/login-service';
 
 @Component({
@@ -9,7 +11,7 @@ import { LoginServiceProvider } from '../../providers/login-service/login-servic
 })
 export class LoginPage {
 
-  constructor(public loginService: LoginServiceProvider) {}
+  constructor(public loginService: LoginServiceProvider, private navCtrl: NavController) {}
 
   loginWithFacebook() {
     this.loginService.signInWithFacebook();
@@ -20,6 +22,6 @@ export class LoginPage {
   }
 
   loginBusinessAccount() {
-    console.log('business login');
+    this.navCtrl.push(BusinessLoginPage);
   }
 }

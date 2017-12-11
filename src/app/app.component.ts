@@ -4,6 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { LoginPage } from "../pages/login/login";
+import { TabsBusinessPage } from "../pages/tabs-business/tabs";
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginServiceProvider } from '../providers/login-service/login-service';
 
@@ -31,9 +32,13 @@ export class MyApp {
 
       this.loginService.isAuth().subscribe((authenticated) => {
 
-        this.rootPage = (!authenticated)
-          ? LoginPage
-          : TabsPage;
+        if (authenticated && authenticated.providerData[0].providerId === "password") {
+          this.rootPage = TabsBusinessPage;
+        } else if (authenticated) {
+          this.rootPage = TabsPage;
+        } else {
+          this.rootPage = LoginPage;
+        }
 
         this.loader.dismiss();
       });
