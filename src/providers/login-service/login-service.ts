@@ -47,6 +47,14 @@ export class LoginServiceProvider {
     }
   }
 
+  signInBusiness(email, password) {
+    this.afAuth.auth
+      .signInWithEmailAndPassword(email, password)
+      .then(res => {
+        console.log(res);
+      })
+  }
+
   signOut() {
     this.afAuth.auth.signOut();
   }

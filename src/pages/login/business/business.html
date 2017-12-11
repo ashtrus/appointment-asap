@@ -1,0 +1,27 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Business Login</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding no-bounce>
+  <ion-list no-lines>
+
+    <ion-item>
+      <ion-input type="text" placeholder="Username" [(ngModel)]="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="password" placeholder="Password" [(ngModel)]="password"></ion-input>
+    </ion-item>
+
+    <button ion-button block outline
+      (click)="loginBusiness()">
+      Business Login
+    </button>
+
+  </ion-list>
+</ion-content>
