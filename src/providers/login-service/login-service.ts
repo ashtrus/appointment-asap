@@ -9,13 +9,8 @@ import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
 
-interface User {
-  uid: string;
-  email: string;
-  photoURL?: string;
-  displayName?: string;
-  companyName?: string;
-}
+import { User } from '../../models/user';
+import { Filter } from '../../models/filter';
 
 @Injectable()
 export class LoginServiceProvider {
@@ -32,7 +27,6 @@ export class LoginServiceProvider {
     this.user = this.afAuth.authState
       .switchMap(user => {
         if (user) {
-          console.log(user);
           return this.afDB.object<User>(`users/${user.uid}`).valueChanges();
         } else {
           return Observable.of(null)
@@ -97,7 +91,6 @@ export class LoginServiceProvider {
 
   updateUserData(userData) {
     // Sets user data to firebase on login
-    console.log(userData);
     const userRef: AngularFireObject<User> = this.afDB.object(`users/${userData.uid}`);
 
     const data: User = {
@@ -105,10 +98,14 @@ export class LoginServiceProvider {
       email: userData.email,
       displayName: userData.displayName,
       photoURL: userData.photoURL,
+      filters: null,
     }
-
     return userRef.set(data);
+  }
 
+  updateUserFilters(newFilters: Filter) {
+    const userRef: AngularFireObject<User> = this.afDB.object(`users/${this.getUser().uid}`);
+    userRef.update({ filters: newFilters });
   }
 
 }

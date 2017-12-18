@@ -1,29 +1,44 @@
 import { Component } from "@angular/core";
 import { NavParams, ViewController } from "ionic-angular";
 
+import { LoginServiceProvider } from "../../providers/login-service/login-service";
+
+import { User } from "../../models/user";
+import { Filter } from "../../models/filter";
+
 @Component({
   templateUrl: "modal-filters.html",
 })
 
 export class ModalFiltersPage {
 
-  distance = 1;
-  time: any = {lower: 8, upper: 20};
-  showAvailable = false;
-  
-  constructor(public navParams: NavParams, public viewCtrl: ViewController) {
-
+  user: User;
+  filters: Filter = {
+    distance: 1,
+    time: { lower: 8, upper: 20 },
+    showSold: false
   }
 
-  onChange(ev: any) {
-    // console.log('Changed', ev);
+  constructor(
+    private loginService: LoginServiceProvider,
+    public navParams: NavParams,
+    public viewCtrl: ViewController
+  ) {
+
+  this.loginService.user.subscribe(user => {
+    this.user = user;
+    this.filters = this.user.filters;
+    });
   }
+
+  onChange(ev: any) {}
 
   dismiss() {
     this.viewCtrl.dismiss();
   }
 
   save() {
-    console.log('save');
+    this.loginService.updateUserFilters(this.filters);
+    this.dismiss();
   }
 }
