@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertController, ModalController, NavController, NavParams } from 'ionic-angular';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ModalController, NavController, NavParams } from 'ionic-angular';
 
 import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
@@ -16,61 +15,28 @@ import { LoginServiceProvider } from "../../providers/login-service/login-servic
 })
 export class HomePage {
 
-  itemsRef: AngularFireList<any>;
-  items: Observable<any[]>;
-  private createAppointmentForm: FormGroup;
+  appointmensRef: AngularFireList<any>;
+  appointments: Observable<any[]>;
 
   constructor(
     private afDB: AngularFireDatabase,
-    private alertCtrl: AlertController,
-    private formBuilder: FormBuilder,
     private loginService: LoginServiceProvider,
     public modalCtrl: ModalController,
     public navCtrl: NavController,
     private navParams: NavParams
   ) {
 
-    this.itemsRef = afDB.list(`items/${this.getUser().uid}`);
-    console.log(this.itemsRef);
+    this.appointmensRef = afDB.list(`appointments/`);
     // Use snapshotChanges().map() to store the key
-    this.items = this.itemsRef.snapshotChanges().map(changes => {
+    this.appointments = this.appointmensRef.snapshotChanges().map(changes => {
       return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
     });
 
   }
 
-  public ngOnInit() {
-    this.createAppointmentForm = this.formBuilder.group({
-      title: ["", Validators.required ],
-      description: ["", Validators.required ],
-      price: ["", Validators.required ],
-    });
-  }
-
   private openFiltersModal() {
     let modal = this.modalCtrl.create(ModalFiltersPage);
     modal.present();
-  }
-
-  // private getUsers() {
-  //   this.usersRef = this.afDB.list('users').valueChanges();
-  // }
-
-  private addAppointment() {
-    this.itemsRef.push(this.createAppointmentForm.value);
-    this.createAppointmentForm.reset();
-  }
-
-  private updateItem(key: string, newText: string) {
-    this.itemsRef.update(key, { text: newText });
-  }
-
-  private deleteItem(key: string) {
-    this.itemsRef.remove(key);
-  }
-
-  private deleteEverything() {
-    this.itemsRef.remove();
   }
 
   private getUser() {

@@ -3,16 +3,42 @@ import { Platform } from 'ionic-angular';
 import { Facebook } from '@ionic-native/facebook';
 
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
+
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/switchMap';
+
+interface User {
+  uid: string;
+  email: string;
+  photoURL?: string;
+  displayName?: string;
+  companyName?: string;
+}
 
 @Injectable()
 export class LoginServiceProvider {
 
+  user: Observable<User>;
+
   constructor(
     private afAuth: AngularFireAuth,
+    private afDB: AngularFireDatabase,
     private fb: Facebook,
     private platform: Platform
-  ) {}
+  ) {
+    // get Auth data, then get firebase user document || null
+    this.user = this.afAuth.authState
+      .switchMap(user => {
+        if (user) {
+          console.log(user);
+          return this.afDB.object<User>(`users/${user.uid}`).valueChanges();
+        } else {
+          return Observable.of(null)
+        }
+      })
+  }
 
   signInWithFacebook() {
     if (this.platform.is('cordova')) {
@@ -43,6 +69,7 @@ export class LoginServiceProvider {
         .signInWithPopup(new firebase.auth.GoogleAuthProvider())
         .then((res) => {
           console.log(res);
+          this.updateUserData(res.user);
         });
     }
   }
@@ -52,6 +79,7 @@ export class LoginServiceProvider {
       .signInWithEmailAndPassword(email, password)
       .then(res => {
         console.log(res);
+        this.updateUserData(res.user);
       })
   }
 
@@ -65,6 +93,22 @@ export class LoginServiceProvider {
 
   getUser() {
     return this.afAuth.auth.currentUser;
+  }
+
+  updateUserData(userData) {
+    // Sets user data to firebase on login
+    console.log(userData);
+    const userRef: AngularFireObject<User> = this.afDB.object(`users/${userData.uid}`);
+
+    const data: User = {
+      uid: userData.uid,
+      email: userData.email,
+      displayName: userData.displayName,
+      photoURL: userData.photoURL,
+    }
+
+    return userRef.set(data);
+
   }
 
 }

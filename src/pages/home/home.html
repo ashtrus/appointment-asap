@@ -24,25 +24,25 @@
     <h1>Categories</h1>
     <ion-row nowrap id="categories">
 
-      <div ion-col col-3 *ngFor="let item of items | async">
+      <div ion-col col-3 *ngFor="let appointment of appointments | async">
         <img src="/assets/imgs/salon3.jpg" />
-        <h2>{{ item.text | titlecase }}</h2>
+        <h2>{{ appointment.companyId | titlecase }}</h2>
       </div>
 
     </ion-row>
 
 
     <h1>Featured</h1>
-    <ion-card *ngFor="let item of items | async">
+    <ion-card *ngFor="let appointment of appointments | async">
 
       <img src="/assets/imgs/salon1.jpg">
 
       <div class="header">
         <p>200 m</p>
-        <p>{{ item.price }} DKK</p>
+        <p>{{ appointment.price }} DKK</p>
       </div>
 
-      <h2 class="title">{{ item.text | titlecase }}</h2>
+      <h2 class="title">{{ appointment.companyId | titlecase }}</h2>
 
       <div ion-item class="info">
         <p>Available: 16:00 - 18:00</p>
@@ -53,46 +53,5 @@
 
     </ion-card>
   </ion-grid>
-
-  <!-- <ion-item>
-    <ion-label floating>New item</ion-label>
-    <ion-input type="text" #newitem></ion-input>
-  </ion-item>
-
-  <button ion-button color="primary" (click)="addItem(newitem.value)">Add</button>
-  <button ion-button color="danger" (click)="deleteEverything()">Delete All</button> -->
-
-
-<form [formGroup]="createAppointmentForm" (ngSubmit)="addAppointment()">
-
-  <ion-item>
-    <ion-label color="danger" *ngIf="createAppointmentForm.controls['title'].touched && createAppointmentForm.controls['title'].invalid">Title is required
-    </ion-label>
-    <ion-input type="text" placeholder="Enter title" formControlName="title"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label color="danger" *ngIf="createAppointmentForm.controls['description'].touched && createAppointmentForm.controls['description'].invalid">Description is required
-    </ion-label>
-    <ion-input type="text" placeholder="Enter description" formControlName="description"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label color="danger" *ngIf="createAppointmentForm.controls['price'].touched && createAppointmentForm.controls['price'].invalid">Price is required
-    </ion-label>
-    <ion-input type="number" placeholder="Enter price" formControlName="price"></ion-input>
-  </ion-item>
-
-
-  <ion-buttons right>
-
-    <button ion-button block [disabled]="createAppointmentForm.invalid">Save
-    </button>
-
-  </ion-buttons>
-
-</form>
-
-
 
 </ion-content>

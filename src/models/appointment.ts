@@ -1,6 +1,7 @@
 export class Appointment {
   constructor(
-    public id: string,
+    public key: string,
+    public companyId: string,
     public companyName: string,
     public title: string,
     public description: string,

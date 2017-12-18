@@ -14,6 +14,7 @@ import { ModalFiltersPage } from '../pages/home/modal-filters';
 import { TabsBusinessPage } from "../pages/tabs-business/tabs";
 import { TabsPage } from '../pages/tabs/tabs';
 import { ReceiptsPage } from "../pages/business/receipts/receipts";
+import { ModalAddAppointmentPage } from "../pages/business/home/modal-add-appointment/modal-add-appointment";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -43,6 +44,7 @@ export const firebaseConfig = {
     ContactPage,
     HomePage,
     LoginPage,
+    ModalAddAppointmentPage,
     ModalFiltersPage,
     SettingsPage,
     ReceiptsPage,
@@ -65,6 +67,7 @@ export const firebaseConfig = {
     ContactPage,
     HomePage,
     LoginPage,
+    ModalAddAppointmentPage,
     ModalFiltersPage,
     SettingsPage,
     ReceiptsPage,
