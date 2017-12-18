@@ -32,8 +32,6 @@ export class ModalAddAppointmentPage {
     this.appointmentsRef = afDB.list(`appointments/`);
     this.companyRef = afDB.object(`companies/${this.getUser().uid}`);
     this.companyDetails = this.companyRef.valueChanges();
-
-
   }
 
   public ngOnInit() {

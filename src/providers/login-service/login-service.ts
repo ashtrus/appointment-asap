@@ -3,7 +3,7 @@ import { Platform } from 'ionic-angular';
 import { Facebook } from '@ionic-native/facebook';
 
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 
 import { Observable } from 'rxjs/Observable';

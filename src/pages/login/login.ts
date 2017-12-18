@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController } from "ionic-angular";
-import { Observable } from 'rxjs/Observable';
 
 import { BusinessLoginPage } from './business/business';
 import { LoginServiceProvider } from '../../providers/login-service/login-service';

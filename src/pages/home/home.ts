@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalController, NavController, NavParams } from 'ionic-angular';
+import { ModalController, NavController } from 'ionic-angular';
 
 import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
@@ -23,7 +23,6 @@ export class HomePage {
     private loginService: LoginServiceProvider,
     public modalCtrl: ModalController,
     public navCtrl: NavController,
-    private navParams: NavParams
   ) {
 
     this.appointmensRef = afDB.list(`appointments/`);

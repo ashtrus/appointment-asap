@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoadingController, NavController, Platform } from 'ionic-angular';
+import { LoadingController, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -17,9 +17,9 @@ export class MyApp {
 
   constructor(
     public loadingCtrl: LoadingController,
-    platform: Platform,
-    statusBar: StatusBar,
-    splashScreen: SplashScreen,
+    public platform: Platform,
+    public statusBar: StatusBar,
+    public splashScreen: SplashScreen,
     private loginService: LoginServiceProvider,
   ) {
     platform.ready().then(() => {
