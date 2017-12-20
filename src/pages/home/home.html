@@ -26,7 +26,7 @@
 
       <div ion-col col-3 *ngFor="let appointment of appointments | async">
         <img src="/assets/imgs/salon3.jpg" />
-        <h2>{{ appointment.companyId | titlecase }}</h2>
+        <h2>{{ appointment.title | titlecase }}</h2>
       </div>
 
     </ion-row>
@@ -42,12 +42,13 @@
         <p>{{ appointment.price }} DKK</p>
       </div>
 
-      <h2 class="title">{{ appointment.companyId | titlecase }}</h2>
+      <h2 class="title">{{ appointment.companyTitle | titlecase }}</h2>
 
       <div ion-item class="info">
         <p>Available: 16:00 - 18:00</p>
-        <button ion-button clear icon-only item-end>
-          <ion-icon name="heart-outline"></ion-icon>
+        <button ion-button clear icon-only item-end (click)="like($event, appointment.companyId)" >
+          <ion-icon *ngIf="isFavorite(appointment.companyId)"  name="heart"></ion-icon>
+          <ion-icon *ngIf="!isFavorite(appointment.companyId)"  name="heart-outline"></ion-icon>
         </button>
       </div>
 

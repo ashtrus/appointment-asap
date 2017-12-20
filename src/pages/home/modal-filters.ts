@@ -25,9 +25,11 @@ export class ModalFiltersPage {
     public viewCtrl: ViewController
   ) {
 
-  this.loginService.user.subscribe(user => {
-    this.user = user;
-    this.filters = this.user.filters;
+    this.loginService.user.subscribe(user => {
+      this.user = user;
+      if (user.filters) {
+        this.filters = this.user.filters;
+      }
     });
   }
 

@@ -7,4 +7,5 @@ export interface User {
   displayName?: string;
   companyName?: string;
   filters?: Filter;
+  likes?: string[];
 }

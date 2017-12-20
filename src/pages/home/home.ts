@@ -17,6 +17,7 @@ export class HomePage {
 
   appointmensRef: AngularFireList<any>;
   appointments: Observable<any[]>;
+  likes: string[] = [];
 
   constructor(
     private afDB: AngularFireDatabase,
@@ -31,11 +32,30 @@ export class HomePage {
       return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
     });
 
+    this.loginService.user.subscribe(user => {
+      if (user.likes) { this.likes = user.likes; }
+    })
   }
 
   private openFiltersModal() {
     let modal = this.modalCtrl.create(ModalFiltersPage);
     modal.present();
+  }
+
+  private like(ev, companyId) {
+
+    ev.stopPropagation();
+    const index = this.likes.indexOf(companyId);
+
+    (index > -1)
+      ? this.likes.splice(index, 1)
+      : this.likes.push(companyId)
+
+    this.loginService.updateUserLikes(this.likes);
+  }
+
+  isFavorite(companyId: string): boolean {
+    return this.likes.indexOf(companyId) > -1;
   }
 
   private getUser() {

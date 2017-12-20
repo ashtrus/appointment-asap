@@ -11,11 +11,13 @@ import 'rxjs/add/operator/switchMap';
 
 import { User } from '../../models/user';
 import { Filter } from '../../models/filter';
+import { Company } from '../../models/company';
 
 @Injectable()
 export class LoginServiceProvider {
 
   user: Observable<User>;
+  company: Observable<Company>;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -28,6 +30,15 @@ export class LoginServiceProvider {
       .switchMap(user => {
         if (user) {
           return this.afDB.object<User>(`users/${user.uid}`).valueChanges();
+        } else {
+          return Observable.of(null)
+        }
+      })
+
+    this.company = this.afAuth.authState
+      .switchMap(company => {
+        if (company) {
+          return this.afDB.object<Company>(`companies/${company.uid}`).valueChanges();
         } else {
           return Observable.of(null)
         }
@@ -98,14 +109,18 @@ export class LoginServiceProvider {
       email: userData.email,
       displayName: userData.displayName,
       photoURL: userData.photoURL,
-      filters: null,
     }
-    return userRef.set(data);
+    return userRef.update(data);
   }
 
   updateUserFilters(newFilters: Filter) {
     const userRef: AngularFireObject<User> = this.afDB.object(`users/${this.getUser().uid}`);
     userRef.update({ filters: newFilters });
+  }
+
+  updateUserLikes(newLikes: string[]) {
+    const userRef: AngularFireObject<User> = this.afDB.object(`users/${this.getUser().uid}`);
+    userRef.update({ likes: newLikes });
   }
 
 }

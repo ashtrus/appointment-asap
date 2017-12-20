@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { NavParams, ViewController } from "ionic-angular";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
-import { AngularFireObject, AngularFireList,  AngularFireDatabase} from 'angularfire2/database';
-
-import { Appointment } from "../../../../models/appointment";
+import { AngularFireList,  AngularFireDatabase} from 'angularfire2/database';
 
 import { LoginServiceProvider } from "../../../../providers/login-service/login-service";
-import { Observable } from 'rxjs/Observable';
+
+import { Appointment } from "../../../../models/appointment";
+import { Company } from '../../../../models/company';
 
 @Component({
   selector: 'page-modal-add-appointment',
@@ -18,8 +18,7 @@ export class ModalAddAppointmentPage {
   appointmentsRef: AngularFireList<any>;
   editMode = false;
   selectedAppointment: Appointment = null;
-  companyRef: AngularFireObject<any>;
-  companyDetails: Observable<any>;
+  company: Company;
   private createAppointmentForm: FormGroup;
 
   constructor(
@@ -30,8 +29,10 @@ export class ModalAddAppointmentPage {
     public viewCtrl: ViewController
   ) {
     this.appointmentsRef = afDB.list(`appointments/`);
-    this.companyRef = afDB.object(`companies/${this.getUser().uid}`);
-    this.companyDetails = this.companyRef.valueChanges();
+    this.loginService.company.subscribe(company => {
+      this.company = company;
+      console.log(company);
+    });
   }
 
   public ngOnInit() {
@@ -44,8 +45,7 @@ export class ModalAddAppointmentPage {
 
   public ionViewWillLoad() {
     this.selectedAppointment = this.navParams.get("appointment");
-    // this.companyDetails = this.navParams.get("company");
-    console.log(this.companyDetails);
+
     if (this.selectedAppointment !== undefined) {
       this.editMode = true;
     } else {
@@ -72,7 +72,7 @@ export class ModalAddAppointmentPage {
 
       this.appointmentsRef.push({
         companyId: this.getUser().uid,
-        companyTitle: this.companyDetails.subscribe(),
+        companyTitle: this.company.title,
         title: this.selectedAppointment.title,
         description: this.selectedAppointment.description,
         price: this.selectedAppointment.price
