@@ -33,7 +33,7 @@
 
 
     <h1>Featured</h1>
-    <ion-card *ngFor="let appointment of appointments | async">
+    <ion-card *ngFor="let appointment of appointments | async" (click)="viewDetails(appointment)" >
 
       <img src="/assets/imgs/salon1.jpg">
 

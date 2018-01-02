@@ -6,8 +6,10 @@ import { Observable } from 'rxjs/Observable';
 
 import { ModalFiltersPage } from './modal-filters';
 import { SettingsPage } from './settings/settings';
+import { AppointmentDetailsPage } from './appointment-details/appointment-details';
 
 import { LoginServiceProvider } from "../../providers/login-service/login-service";
+import { Appointment } from '../../models/appointment';
 
 @Component({
   selector: 'page-home',
@@ -54,8 +56,13 @@ export class HomePage {
     this.loginService.updateUserLikes(this.likes);
   }
 
-  isFavorite(companyId: string): boolean {
+  private isFavorite(companyId: string): boolean {
     return this.likes.indexOf(companyId) > -1;
+  }
+
+  private viewDetails(appointment: Appointment) {
+    console.log(appointment);
+    this.navCtrl.push(AppointmentDetailsPage, { appointment });
   }
 
   private getUser() {

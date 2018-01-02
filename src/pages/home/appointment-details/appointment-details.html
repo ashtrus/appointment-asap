@@ -1,0 +1,23 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ appointment.title | titlecase }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content no-bounce>
+
+  <img src="/assets/imgs/salon2.jpg" />
+  <h3>{{ appointment.title | titlecase }}</h3>
+  <p>{{ appointment.companyTitle }}</p>
+  <p>{{ appointment.description }}</p>
+  <p>{{ appointment.price }}</p>
+
+
+  <ion-buttons>
+    <button ion-button full (click)="book()">Book</button>
+  </ion-buttons>
+
+</ion-content>
