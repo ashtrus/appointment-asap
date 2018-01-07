@@ -6,8 +6,10 @@ import { Observable } from 'rxjs/Observable';
 
 import { ModalFiltersPage } from './modal-filters';
 import { SettingsPage } from './settings/settings';
+import { AppointmentDetailsPage } from './appointment-details/appointment-details';
 
 import { LoginServiceProvider } from "../../providers/login-service/login-service";
+import { Appointment } from '../../models/appointment';
 
 import { trigger, keyframes, animate, transition } from '@angular/animations';
 import * as kf from '../../assets/animations';
@@ -56,6 +58,7 @@ export class HomePage {
       appointment.animationState = state;
     }
   }
+
   private resetAnimationState(appointment) {
     appointment.animationState = '';
   }
@@ -89,7 +92,7 @@ export class HomePage {
     this.navCtrl.push(SettingsPage);
   }
 
-  private openDetailsPage() {
-    this.navCtrl.push();
+  private openDetailsPage(appointment: Appointment) {
+    this.navCtrl.push(AppointmentDetailsPage, { appointment });
   }
 }

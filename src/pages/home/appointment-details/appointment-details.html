@@ -1,0 +1,41 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ appointment.title | titlecase }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content no-bounce>
+
+  <div id="top">
+
+    <img src="/assets/imgs/salon2.jpg" />
+
+    <div padding id="price">
+      <p>Appointment starts 16:00</p>
+      <p>{{ appointment.price }} DKK</p>
+    </div>
+
+  </div>
+
+
+  <div padding id="description">
+    <h1>{{ appointment.companyTitle }}</h1>
+    <p>{{ appointment.description }}</p>
+    <p>CVR: 12345678</p>
+
+    <ion-item no-lines>
+      <ion-icon name="navigate" color="primary" padding-right></ion-icon>
+      Address here:
+    </ion-item>
+
+  </div>
+
+
+  <ion-buttons>
+    <button ion-button full (click)="book(appointment)">Book</button>
+  </ion-buttons>
+
+</ion-content>

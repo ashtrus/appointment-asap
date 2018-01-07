@@ -19,6 +19,8 @@ export class LoginServiceProvider {
   user: Observable<User>;
   company: Observable<Company>;
 
+  // TODO: get company data / details function / observable
+
   constructor(
     private afAuth: AngularFireAuth,
     private afDB: AngularFireDatabase,
