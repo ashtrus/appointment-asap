@@ -1,9 +1,10 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
-import { AboutPage } from '../pages/about/about';
+import { MapPage } from '../pages/map/map';
 import { BusinessHomePage } from "../pages/business/home/home";
 import { BusinessLoginPage } from '../pages/login/business/business';
 import { ContactPage } from '../pages/contact/contact';
@@ -23,8 +24,22 @@ import { Facebook } from '@ionic-native/facebook'
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AgmCoreModule } from '@agm/core';
 
+import { MapServiceProvider } from '../providers/map-service/map-service';
 import { LoginServiceProvider } from '../providers/login-service/login-service';
+
+import "hammerjs";
+import * as Hammer from 'hammerjs';
+import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { HammertimeDirective } from '../assets/hammertime';
+
+export class MyHammerConfig extends HammerGestureConfig  {
+  overrides = <any>{
+      // override hammerjs default configuration
+      'swipe': { direction: Hammer.DIRECTION_ALL  }
+  }
+}
 
 export const firebaseConfig = {
   apiKey: "AIzaSyB34Soo3EZdDsVvP5jtT-YbbYYKIaI1gEQ",
@@ -38,10 +53,11 @@ export const firebaseConfig = {
 @NgModule({
   declarations: [
     MyApp,
-    AboutPage,
+    MapPage,
     BusinessHomePage,
     BusinessLoginPage,
     ContactPage,
+    HammertimeDirective,
     HomePage,
     LoginPage,
     ModalAddAppointmentPage,
@@ -52,16 +68,20 @@ export const firebaseConfig = {
     TabsPage
   ],
   imports: [
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBcSTiMq_TDkFpVfp1hcp6BfHpMe4AQ4c8'
+    }),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     BrowserModule,
+    BrowserAnimationsModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    AboutPage,
+    MapPage,
     BusinessHomePage,
     BusinessLoginPage,
     ContactPage,
@@ -77,6 +97,11 @@ export const firebaseConfig = {
   providers: [
     AngularFireDatabase,
     Facebook,
+    {
+      provide: HAMMER_GESTURE_CONFIG,
+      useClass: MyHammerConfig
+    },
+    MapServiceProvider,
     LoginServiceProvider,
     StatusBar,
     SplashScreen,

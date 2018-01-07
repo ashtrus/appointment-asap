@@ -1,0 +1,16 @@
+page-map {
+
+  #spinner {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  agm-map {
+    height: 90vh;
+    width: 100vw;
+  }
+
+}

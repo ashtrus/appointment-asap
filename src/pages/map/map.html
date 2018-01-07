@@ -1,0 +1,35 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Map</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <div *ngIf="!lat || !lng" id="spinner">
+    <ion-spinner></ion-spinner>
+  </div>
+
+  <div *ngIf="lat && lng">
+
+    <agm-map [latitude]="lat" [longitude]="lng">
+
+      <agm-marker *ngFor="let marker of markers"
+        [latitude]="marker.location[0]"
+        [longitude]="marker.location[1]"
+        [iconUrl]="'https://cdn1.iconfinder.com/data/icons/designer-s-tools-1/512/Coffee-64.png'">
+
+        <agm-info-window>
+          <p>You are {{ marker.distance | number : '1.2-2' }} km from this point</p>
+        </agm-info-window>
+
+      </agm-marker>
+
+    </agm-map>
+
+  </div>
+
+</ion-content>

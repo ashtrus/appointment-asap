@@ -85,6 +85,5 @@
         <variable name="APP_ID" value="144131242898630" />
         <variable name="APP_NAME" value="Appointment ASAP" />
     </plugin>
-    <engine name="android" spec="~6.3.0" />
     <engine name="ios" spec="~4.5.3" />
 </widget>
