@@ -51,12 +51,12 @@ export class HomePage {
     })
   }
 
-  startAnimation(appointment, state) {
+  private startAnimation(appointment, state) {
     if (!appointment.animationState) {
       appointment.animationState = state;
     }
   }
-  resetAnimationState(appointment) {
+  private resetAnimationState(appointment) {
     appointment.animationState = '';
   }
 
@@ -77,7 +77,7 @@ export class HomePage {
     this.loginService.updateUserLikes(this.likes);
   }
 
-  isFavorite(companyId: string): boolean {
+  private isFavorite(companyId: string): boolean {
     return this.likes.indexOf(companyId) > -1;
   }
 
@@ -87,5 +87,9 @@ export class HomePage {
 
   private openSettingsPage() {
     this.navCtrl.push(SettingsPage);
+  }
+
+  private openDetailsPage() {
+    this.navCtrl.push();
   }
 }
