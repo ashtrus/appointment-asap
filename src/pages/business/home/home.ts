@@ -9,6 +9,8 @@ import { ModalAddAppointmentPage } from './modal-add-appointment/modal-add-appoi
 import { LoginServiceProvider } from "../../../providers/login-service/login-service";
 import { Appointment } from '../../../models/appointment';
 
+import { BusinessSettingsPage } from './settings/settings';
+
 @Component({
   selector: 'page-business-home',
   templateUrl: 'home.html',
@@ -82,6 +84,10 @@ export class BusinessHomePage {
     });
     confirm.present();
 
+  }
+
+  private openSettingsPage() {
+    this.navCtrl.push(BusinessSettingsPage);
   }
 
   private logOut() {

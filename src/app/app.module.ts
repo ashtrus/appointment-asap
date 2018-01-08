@@ -17,6 +17,9 @@ import { TabsBusinessPage } from "../pages/tabs-business/tabs";
 import { TabsPage } from '../pages/tabs/tabs';
 import { ReceiptsPage } from "../pages/business/receipts/receipts";
 import { ModalAddAppointmentPage } from "../pages/business/home/modal-add-appointment/modal-add-appointment";
+import { BusinessDetailsPage } from "../pages/business/home/settings/business-details/business-details";
+import { BusinessSettingsPage } from "../pages/business/home/settings/settings";
+import { NotificationSettingsPage } from "../pages/business/home/settings/notifications/notifications";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -58,12 +61,15 @@ export const firebaseConfig = {
     AppointmentDetailsPage,
     BusinessHomePage,
     BusinessLoginPage,
+    BusinessDetailsPage,
+    BusinessSettingsPage,
     UserReceiptsPage,
     HammertimeDirective,
     HomePage,
     LoginPage,
     ModalAddAppointmentPage,
     ModalFiltersPage,
+    NotificationSettingsPage,
     SettingsPage,
     ReceiptsPage,
     TabsBusinessPage,
@@ -85,13 +91,16 @@ export const firebaseConfig = {
     MyApp,
     MapPage,
     AppointmentDetailsPage,
+    BusinessDetailsPage,
     BusinessHomePage,
     BusinessLoginPage,
+    BusinessSettingsPage,
     UserReceiptsPage,
     HomePage,
     LoginPage,
     ModalAddAppointmentPage,
     ModalFiltersPage,
+    NotificationSettingsPage,
     SettingsPage,
     ReceiptsPage,
     TabsBusinessPage,

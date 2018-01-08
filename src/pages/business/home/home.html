@@ -2,6 +2,14 @@
   <ion-navbar>
     <ion-title>{{ (companyDetails | async)?.title }}</ion-title>
 
+    <ion-buttons start>
+
+      <button ion-button icon-only item-end (click)="openSettingsPage()">
+        <ion-icon name="settings"></ion-icon>
+      </button>
+
+    </ion-buttons>
+
     <ion-buttons end>
 
       <button ion-button icon-only item-end (click)="logOut()">
