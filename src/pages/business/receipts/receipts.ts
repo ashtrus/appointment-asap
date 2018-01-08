@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the ReceiptsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
+
+import { LoginServiceProvider } from '../../../providers/login-service/login-service';
 
 @Component({
   selector: 'page-receipts',
@@ -14,11 +11,17 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class ReceiptsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  receiptsRef: AngularFireList<any>;
+  receipts: Observable<any[]>;
+
+  constructor(private afDB: AngularFireDatabase, private loginService: LoginServiceProvider) {
+
+    const companyId = this.loginService.getUser().uid;
+    this.receiptsRef = afDB.list(`receipts/`, ref => ref.orderByChild('/companyId').equalTo(`${companyId}`));
+
+    this.receipts = this.receiptsRef.valueChanges();
+
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ReceiptsPage');
-  }
 
 }
