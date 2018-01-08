@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavParams, ViewController } from "ionic-angular";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
@@ -13,7 +13,7 @@ import { Company } from '../../../../models/company';
   selector: 'page-modal-add-appointment',
   templateUrl: 'modal-add-appointment.html',
 })
-export class ModalAddAppointmentPage {
+export class ModalAddAppointmentPage implements OnInit {
 
   appointmentsRef: AngularFireList<any>;
   editMode = false;

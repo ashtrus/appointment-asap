@@ -7,10 +7,9 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content no-bounce>
 
   <ion-list>
-
 
     <button ion-item (click)="openPage('settings')">
       Business details
@@ -22,6 +21,13 @@
 
 
     <ion-item-divider color="light"></ion-item-divider>
+
+    <ion-item>
+      <ion-label>Log out</ion-label>
+      <button ion-button clear icon-only item-end (click)="logOut()">
+        <ion-icon name="log-out"></ion-icon>
+      </button>
+    </ion-item>
 
 
   </ion-list>

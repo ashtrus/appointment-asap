@@ -90,8 +90,4 @@ export class BusinessHomePage {
     this.navCtrl.push(BusinessSettingsPage);
   }
 
-  private logOut() {
-    this.loginService.signOut();
-  }
-
 }

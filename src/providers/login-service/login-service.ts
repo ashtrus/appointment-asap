@@ -86,7 +86,8 @@ export class LoginServiceProvider {
       .signInWithEmailAndPassword(email, password)
       .then(res => {
         console.log(res);
-        this.updateUserData(res.user);
+        // FIXME: not sure if works correctly
+        this.updateCompanyData(res);
       })
   }
 
@@ -123,6 +124,21 @@ export class LoginServiceProvider {
   updateUserLikes(newLikes: string[]) {
     const userRef: AngularFireObject<User> = this.afDB.object(`users/${this.getUser().uid}`);
     userRef.update({ likes: newLikes });
+  }
+
+
+  updateCompanyData(companyData) {
+    // Sets user data to firebase on login
+    console.log('companyData', companyData);
+    const companyRef: AngularFireObject<Company> = this.afDB.object(`companies/${companyData.uid}`);
+
+    const data: Company = {
+      cvr: companyData.cvr,
+      title: companyData.title,
+      category: companyData.category,
+      logoUrl: companyData.logoUrl,
+    }
+    return companyRef.update(data);
   }
 
 }

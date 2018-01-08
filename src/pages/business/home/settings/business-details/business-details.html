@@ -7,6 +7,72 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content no-bounce>
+
+  <ion-list>
+
+
+    <ion-item *ngIf="getUser()">
+
+      <ion-thumbnail item-start>
+        <!-- FIXME: default logo needed -->
+        <img [src]="company?.logoUrl" alt="company logo">
+      </ion-thumbnail>
+
+      <h2>{{ company?.title }}</h2>
+      <p>{{ getUser().email }}</p>
+
+      <button ion-button clear item-end (click)="getProfile()">
+        <ion-icon name="contact"></ion-icon>
+      </button>
+
+    </ion-item>
+
+    <ion-item-divider color="light"></ion-item-divider>
+
+  </ion-list>
+
+  <form [formGroup]="updateCompanyDetailsForm" (ngSubmit)="updateCompanyDetails()">
+
+    <!-- TODO: VALIDATIONS -->
+    <ion-item>
+      <ion-label floating color="primary">
+        CVR number
+      </ion-label>
+      <ion-input type="number" placeholder="Enter cvr" formControlName="cvr" [value]="company?.cvr" maxlength="8"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating color="primary">
+        Title
+      </ion-label>
+      <ion-input type="text" placeholder="Enter title" formControlName="title" [value]="company?.title"></ion-input>
+    </ion-item>
+
+    <!-- TODO: make SELECT instead of text element -->
+    <ion-item>
+      <ion-label floating color="primary">
+        Category
+      </ion-label>
+      <ion-input type="text" placeholder="Enter category" formControlName="category" [value]="company?.category"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating color="primary">
+        Logo URL
+      </ion-label>
+      <ion-input type="text" placeholder="Enter logoUrl" formControlName="logoUrl" [value]="company?.logoUrl"></ion-input>
+    </ion-item>
+
+
+    <ion-buttons right>
+
+      <button ion-button block [disabled]="updateCompanyDetailsForm.invalid">
+        Save
+      </button>
+
+    </ion-buttons>
+
+  </form>
 
 </ion-content>
