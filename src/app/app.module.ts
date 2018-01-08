@@ -8,7 +8,7 @@ import { MapPage } from '../pages/map/map';
 import { AppointmentDetailsPage } from '../pages/home/appointment-details/appointment-details';
 import { BusinessHomePage } from "../pages/business/home/home";
 import { BusinessLoginPage } from '../pages/login/business/business';
-import { ContactPage } from '../pages/contact/contact';
+import { UserReceiptsPage } from '../pages/receipts/receipts';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { SettingsPage } from '../pages/home/settings/settings';
@@ -58,7 +58,7 @@ export const firebaseConfig = {
     AppointmentDetailsPage,
     BusinessHomePage,
     BusinessLoginPage,
-    ContactPage,
+    UserReceiptsPage,
     HammertimeDirective,
     HomePage,
     LoginPage,
@@ -87,7 +87,7 @@ export const firebaseConfig = {
     AppointmentDetailsPage,
     BusinessHomePage,
     BusinessLoginPage,
-    ContactPage,
+    UserReceiptsPage,
     HomePage,
     LoginPage,
     ModalAddAppointmentPage,

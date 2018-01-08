@@ -9,7 +9,7 @@ import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { LoginServiceProvider } from '../../../providers/login-service/login-service';
 import { Observable } from 'rxjs/Observable';
 
-import { ContactPage } from '../../contact/contact';
+import { UserReceiptsPage } from '../../receipts/receipts';
 
 @Component({
   selector: 'page-appointment-details',
@@ -34,11 +34,12 @@ export class AppointmentDetailsPage {
 
     this.loginService.user.subscribe((user) => {
 
+      // FIXME: not all data necessary only contacts and photo, phone as well
       this.receipt.user = user;
 
       this.afDB.list('/receipts').push(this.receipt).then(() => {
         // this.afDB.list('/appointments').remove(appointment.key);
-        this.navCtrl.setRoot(ContactPage);
+        this.navCtrl.setRoot(UserReceiptsPage);
       })
     });
   }
