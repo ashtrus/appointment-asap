@@ -68,11 +68,13 @@ export class ModalAddAppointmentPage implements OnInit {
     this.selectedAppointment.description = this.createAppointmentForm.controls.description.value;
     this.selectedAppointment.price = this.createAppointmentForm.controls.price.value;
 
+    const companyDetails: any = this.company;
+    companyDetails.companyId = this.getUser().uid;
+
     if (!this.editMode) {
 
       this.appointmentsRef.push({
-        companyId: this.getUser().uid,
-        companyTitle: this.company.title,
+        companyDetails: companyDetails,
         title: this.selectedAppointment.title,
         description: this.selectedAppointment.description,
         price: this.selectedAppointment.price

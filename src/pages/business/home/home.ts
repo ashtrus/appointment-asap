@@ -32,7 +32,7 @@ export class BusinessHomePage {
   ) {
 
     this.appointmentsRef = afDB.list(`appointments/`, ref =>
-      ref.orderByChild('companyId').equalTo(this.getUser().uid));
+      ref.orderByChild('companyDetails/companyId').equalTo(this.getUser().uid));
 
     this.companyRef = afDB.object(`companies/${this.getUser().uid}`);
     // Use snapshotChanges().map() to store the key
