@@ -24,9 +24,9 @@
     <h1>Categories</h1>
     <ion-row nowrap id="categories">
 
-      <div ion-col col-3 *ngFor="let appointment of appointments | async">
-        <img src="/assets/imgs/salon3.jpg" />
-        <h2>{{ appointment.companyDetails.category | titlecase }}</h2>
+      <div ion-col col-3 *ngFor="let category of categories" (click)="openCategory(category.title)" >
+        <img [src]="category.logo" />
+        <h2>{{ category.title | titlecase }}</h2>
       </div>
 
     </ion-row>

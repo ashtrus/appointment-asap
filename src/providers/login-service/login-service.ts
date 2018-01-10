@@ -3,7 +3,7 @@ import { Platform } from 'ionic-angular';
 import { Facebook } from '@ionic-native/facebook';
 
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireObject, AngularFireList } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 
 import { Observable } from 'rxjs/Observable';
@@ -18,6 +18,7 @@ export class LoginServiceProvider {
 
   user: Observable<User>;
   company: Observable<Company>;
+  categories: Observable<string[]>;
 
   // TODO: get company data / details function / observable
 
@@ -139,6 +140,11 @@ export class LoginServiceProvider {
       logoUrl: companyData.logoUrl,
     }
     return companyRef.update(data);
+  }
+
+  getCategories() {
+    const categoryRef: AngularFireList<string> = this.afDB.list(`categories/`);
+    return this.categories = categoryRef.valueChanges();
   }
 
 }

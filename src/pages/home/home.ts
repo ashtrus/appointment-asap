@@ -34,6 +34,7 @@ export class HomePage {
   appointmentsRef: AngularFireList<any>;
   appointments: Observable<any[]>;
   likes: string[] = [];
+  categories: string[];
 
   constructor(
     private afDB: AngularFireDatabase,
@@ -51,6 +52,10 @@ export class HomePage {
     this.loginService.user.subscribe(user => {
       if (user.likes) { this.likes = user.likes; }
     })
+
+    this.loginService.getCategories().subscribe((c) => {
+      if (c) { this.categories = c; }
+    })
   }
 
   private startAnimation(appointment, state) {
@@ -61,6 +66,10 @@ export class HomePage {
 
   private resetAnimationState(appointment) {
     appointment.animationState = '';
+  }
+
+  private openCategory(category) {
+    console.log('open category --> ', category);
   }
 
   private openFiltersModal() {
@@ -95,4 +104,5 @@ export class HomePage {
   private openDetailsPage(appointment: Appointment) {
     this.navCtrl.push(AppointmentDetailsPage, { appointment });
   }
+
 }
