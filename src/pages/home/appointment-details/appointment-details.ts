@@ -18,6 +18,7 @@ import { UserReceiptsPage } from '../../receipts/receipts';
 export class AppointmentDetailsPage {
 
   appointment: Appointment;
+  company: Company;
   receipt: Receipt;
 
   constructor(
@@ -27,6 +28,7 @@ export class AppointmentDetailsPage {
     public navParams: NavParams
   ) {
     this.appointment = this.navParams.get('appointment');
+    this.company = this.appointment.companyDetails;
   }
 
   private book(appointment: Appointment) {
@@ -38,6 +40,7 @@ export class AppointmentDetailsPage {
       this.receipt.user = user;
 
       this.afDB.list('/receipts').push(this.receipt).then(() => {
+        // FIXME: remove when booking system entirely fixed
         // this.afDB.list('/appointments').remove(appointment.key);
         this.navCtrl.setRoot(UserReceiptsPage);
       })
