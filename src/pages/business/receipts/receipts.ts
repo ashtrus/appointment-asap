@@ -17,7 +17,7 @@ export class ReceiptsPage {
   constructor(private afDB: AngularFireDatabase, private loginService: LoginServiceProvider) {
 
     const companyId = this.loginService.getUser().uid;
-    this.receiptsRef = afDB.list(`receipts/`, ref => ref.orderByChild('/companyId').equalTo(`${companyId}`));
+    this.receiptsRef = afDB.list(`receipts/`, ref => ref.orderByChild('companyDetails/companyId').equalTo(`${companyId}`));
 
     this.receipts = this.receiptsRef.valueChanges();
 

@@ -50,7 +50,7 @@ export class ModalAddAppointmentPage implements OnInit {
       this.editMode = true;
     } else {
       this.editMode = false;
-      this.selectedAppointment = new Appointment("", "", "", "", "", "");
+      this.selectedAppointment = new Appointment("", this.company, "", "", "");
     }
   }
 

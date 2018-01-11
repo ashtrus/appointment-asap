@@ -87,8 +87,6 @@ export class LoginServiceProvider {
       .signInWithEmailAndPassword(email, password)
       .then(res => {
         console.log(res);
-        // FIXME: not sure if works correctly
-        this.updateCompanyData(res);
       })
   }
 

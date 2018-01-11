@@ -18,10 +18,15 @@
     <ion-list>
       <ion-item *ngFor="let receipt of receipts | async">
         <ion-thumbnail item-left>
-          <img src="../../assets/imgs/logo.png">
+          <img *ngIf="!receipt.user.photoURL == ''"
+            [src]="receipt.user.photoURL">
+          <img *ngIf="receipt.user.photoURL === ''"
+            src="../../assets/imgs/logo.png">
         </ion-thumbnail>
         <h2>{{ receipt.title | titlecase }}</h2>
         <p>2018.01.01</p>
+        <p>{{ receipt.user.displayName }}</p>
+        <p>{{ receipt.user.email }}</p>
         <button ion-button clear item-right></button>
       </ion-item>
     </ion-list>

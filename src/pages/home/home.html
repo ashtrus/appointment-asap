@@ -55,9 +55,9 @@
 
       <div ion-item class="info">
         <p>Available: 16:00 - 18:00</p>
-        <button ion-button clear icon-only item-end (click)="like($event, appointment.companyId)" >
-          <ion-icon *ngIf="isFavorite(appointment.companyId)"  name="heart"></ion-icon>
-          <ion-icon *ngIf="!isFavorite(appointment.companyId)"  name="heart-outline"></ion-icon>
+        <button ion-button clear icon-only item-end (click)="like($event, appointment.companyDetails.companyId)" >
+          <ion-icon *ngIf="isFavorite(appointment.companyDetails.companyId)"  name="heart"></ion-icon>
+          <ion-icon *ngIf="!isFavorite(appointment.companyDetails.companyId)"  name="heart-outline"></ion-icon>
         </button>
 
         <button mat-raised-button color="primary" (tap)="startAnimation(appointment, 'wobble')">WOBBLE</button>
