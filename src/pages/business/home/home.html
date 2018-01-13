@@ -34,7 +34,7 @@
       <h2 class="title">{{ appointment.text | titlecase }}</h2>
 
       <div ion-item class="info">
-        <p>Available: 16:00 - 18:00</p>
+        <p>Available: <span>{{ appointment.startTime | date: 'dd MMM H:m' }} - {{ appointment.endTime | date: 'H:m'}}</span></p>
         <button ion-button clear icon-only item-end color="light"
           (click)="update(appointment)">
           <ion-icon name="create"></ion-icon>

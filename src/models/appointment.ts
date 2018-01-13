@@ -6,5 +6,7 @@ export class Appointment {
     public title: string,
     public description: string,
     public price: string,
+    public startTime: string,
+    public endTime: string,
 ) { }
 }

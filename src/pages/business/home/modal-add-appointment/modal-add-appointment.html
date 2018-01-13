@@ -15,50 +15,68 @@
 
 <ion-content>
 
+  <!-- FIXME: use it inside the form -->
+  <!-- FIXME: add min, max, values when selecting -->
+
+  <ion-item>
+    <ion-label>Start Time</ion-label>
+    <ion-datetime [(ngModel)]="startTime"
+      displayFormat="DD MMM H:m"
+      minuteValues="0,5,10,15,20,25,30,35,40,45,50,55">
+    </ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>End Time</ion-label>
+    <ion-datetime [(ngModel)]="endTime"
+      displayFormat="DD MMM H:m"
+      minuteValues="0,5,10,15,20,25,30,35,40,45,50,55">
+    </ion-datetime>
+  </ion-item>
+
   <form [formGroup]="createAppointmentForm" (ngSubmit)="saveAppointment()">
 
-  <ion-item>
-    <ion-label color="danger"
-      *ngIf="createAppointmentForm.controls['title'].touched && createAppointmentForm.controls['title'].invalid">
-      Title is required
-    </ion-label>
-    <ion-input type="text" placeholder="Enter title"
-      formControlName="title"
-      [value]="selectedAppointment.title"
-    ></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label color="danger"
+        *ngIf="createAppointmentForm.controls['title'].touched && createAppointmentForm.controls['title'].invalid">
+        Title is required
+      </ion-label>
+      <ion-input type="text" placeholder="Enter title"
+        formControlName="title"
+        [value]="selectedAppointment.title"
+      ></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label color="danger"
-      *ngIf="createAppointmentForm.controls['description'].touched && createAppointmentForm.controls['description'].invalid">
-      Description is required
-    </ion-label>
-    <ion-input type="text" placeholder="Enter description"
-      formControlName="description"
-      [value]="selectedAppointment.description"
-    ></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label color="danger"
+        *ngIf="createAppointmentForm.controls['description'].touched && createAppointmentForm.controls['description'].invalid">
+        Description is required
+      </ion-label>
+      <ion-input type="text" placeholder="Enter description"
+        formControlName="description"
+        [value]="selectedAppointment.description"
+      ></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label color="danger"
-      *ngIf="createAppointmentForm.controls['price'].touched && createAppointmentForm.controls['price'].invalid">Price is required
-    </ion-label>
-    <ion-input type="number" placeholder="Enter price"
-      formControlName="price"
-      [value]="selectedAppointment.price"
-    ></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label color="danger"
+        *ngIf="createAppointmentForm.controls['price'].touched && createAppointmentForm.controls['price'].invalid">Price is required
+      </ion-label>
+      <ion-input type="number" placeholder="Enter price"
+        formControlName="price"
+        [value]="selectedAppointment.price"
+      ></ion-input>
+    </ion-item>
+
+    <ion-buttons right>
+
+      <button ion-button block [disabled]="createAppointmentForm.invalid">
+        Save
+      </button>
+
+    </ion-buttons>
 
 
-  <ion-buttons right>
-
-    <button ion-button block
-      [disabled]="createAppointmentForm.invalid">
-      Save
-    </button>
-
-  </ion-buttons>
-
-</form>
+  </form>
 
 </ion-content>

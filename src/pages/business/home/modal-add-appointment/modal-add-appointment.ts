@@ -20,6 +20,8 @@ export class ModalAddAppointmentPage implements OnInit {
   selectedAppointment: Appointment = null;
   company: Company;
   private createAppointmentForm: FormGroup;
+  startTime: string;
+  endTime: string;
 
   constructor(
     private afDB: AngularFireDatabase,
@@ -48,9 +50,13 @@ export class ModalAddAppointmentPage implements OnInit {
 
     if (this.selectedAppointment !== undefined) {
       this.editMode = true;
+      this.startTime = this.selectedAppointment.startTime;
+      this.endTime = this.selectedAppointment.endTime;
     } else {
       this.editMode = false;
-      this.selectedAppointment = new Appointment("", "", "", "", "", "");
+      this.startTime = new Date().toISOString()
+      this.endTime = new Date(new Date().getTime() + (1 * 60 * 60 * 1000)).toISOString();
+      this.selectedAppointment = new Appointment("", "", "", "", "", "", this.startTime, this.endTime);
     }
   }
 
@@ -77,7 +83,9 @@ export class ModalAddAppointmentPage implements OnInit {
         companyDetails: companyDetails,
         title: this.selectedAppointment.title,
         description: this.selectedAppointment.description,
-        price: this.selectedAppointment.price
+        price: this.selectedAppointment.price,
+        startTime: this.startTime,
+        endTime: this.endTime,
       });
 
     } else {
@@ -85,9 +93,10 @@ export class ModalAddAppointmentPage implements OnInit {
       this.appointmentsRef.update(this.selectedAppointment.key, {
         title:        this.selectedAppointment.title,
         description:  this.selectedAppointment.description,
-        price:        this.selectedAppointment.price
+        price: this.selectedAppointment.price,
+        startTime: this.startTime,
+        endTime: this.endTime,
       });
-
     }
 
     this.createAppointmentForm.reset();
