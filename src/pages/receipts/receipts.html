@@ -23,7 +23,7 @@
             <img src="../../assets/imgs/logo.png">
           </ion-thumbnail>
           <h2>{{ receipt.title | titlecase }}</h2>
-          <p>2018.01.01</p>
+          <p>{{ receipt.startTime | date: 'dd MMM HH:mm' }} - {{ receipt.endTime | date: 'HH:mm' }}</p>
           <button ion-button clear item-right></button>
         </ion-item>
       </ion-list>

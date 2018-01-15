@@ -15,10 +15,14 @@
       Business details
     </button>
 
-    <button ion-item (click)="openPage('notifications')">
+    <!-- <button ion-item (click)="openPage('notifications')">
       Notifications
-    </button>
+    </button> -->
 
+    <ion-item>
+      <ion-label>Notify about new appointments</ion-label>
+      <ion-toggle [(ngModel)]="notifications"></ion-toggle>
+    </ion-item>
 
     <ion-item-divider color="light"></ion-item-divider>
 

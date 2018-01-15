@@ -12,6 +12,8 @@ import { LoginServiceProvider } from '../../../../providers/login-service/login-
 })
 export class BusinessSettingsPage {
 
+  notifications = true;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private loginService: LoginServiceProvider) {
   }
 

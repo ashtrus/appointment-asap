@@ -40,7 +40,6 @@ export class MapServiceProvider {
   /// Queries database for nearby locations
   /// Maps results to the hits BehaviorSubject
   public getLocations(radius: number, coords: Array<number>) {
-
     this.geoFire.query({
       center: coords,
       radius: radius
@@ -51,6 +50,7 @@ export class MapServiceProvider {
         distance: distance
       }
       let currentHits = this.hits.value
+      console.log(hit, currentHits);
       currentHits.push(hit)
       this.hits.next(currentHits)
     })

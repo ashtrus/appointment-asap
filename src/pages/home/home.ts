@@ -66,7 +66,7 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     // FIXME: change to filters data
-    this.getUserLocation(15);
+    this.getUserLocation(50);
     this.mapService.hits
       .subscribe(hits => {
         this.markers = hits
@@ -105,14 +105,16 @@ export class HomePage implements OnInit {
     }
   }
 
-  private like(ev, companyId) {
+  private like(ev, appointment) {
 
     ev.stopPropagation();
-    const index = this.likes.indexOf(companyId);
+    const index = this.likes.indexOf(appointment.companyDetails.companyId);
 
     (index > -1)
       ? this.likes.splice(index, 1)
-      : this.likes.push(companyId)
+      : this.likes.push(appointment.companyDetails.companyId)
+
+    this.startAnimation(appointment, 'jello');
 
     this.loginService.updateUserLikes(this.likes);
   }

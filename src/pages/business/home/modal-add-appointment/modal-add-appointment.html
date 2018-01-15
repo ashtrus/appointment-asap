@@ -52,10 +52,10 @@
         *ngIf="createAppointmentForm.controls['description'].touched && createAppointmentForm.controls['description'].invalid">
         Description is required
       </ion-label>
-      <ion-input type="text" placeholder="Enter description"
+      <ion-textarea type="text" placeholder="Enter description" rows="4"
         formControlName="description"
         [value]="selectedAppointment.description"
-      ></ion-input>
+      ></ion-textarea>
     </ion-item>
 
     <ion-item>

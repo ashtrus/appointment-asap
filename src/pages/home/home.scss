@@ -2,16 +2,20 @@ page-home {
   ion-content {
     ion-grid {
       h1 {
-        font-size: 1.7rem;
+        font-size: 2rem;
         font-weight: 600;
         padding-left: 10px;
+        color: #488aff;
       }
       ion-row {
         overflow-y: auto;
         &#categories {
           padding-left: 0.5em;
           div {
-            margin-right: 0.25em;
+            margin-right: 1em;
+            img{
+              width: 50%;
+            }
             h2 {
               margin-top: 0;
               font-size: 1em;
@@ -23,6 +27,13 @@ page-home {
       }
       ion-card {
         position: relative;
+        ion-avatar{
+          width: 60px;
+          margin: 0 auto;
+          position: absolute;
+          right: 0;
+          top: 0;
+        }
         .header {
           position: absolute;
           display: flex;

@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { NavController, NavParams } from 'ionic-angular';
 
 import { MapServiceProvider } from '../../providers/map-service/map-service';
 
@@ -15,14 +14,16 @@ export class MapPage implements OnInit, OnDestroy {
   markers: any;
   subscription: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private mapService: MapServiceProvider) {
+  constructor(private mapService: MapServiceProvider) {
   }
 
   ngOnInit() {
-    // this.seedDatabase();
     this.getUserLocation(15);
     this.subscription = this.mapService.hits
-      .subscribe(hits => this.markers = hits)
+      .subscribe(hits => {
+        this.markers = hits;
+        console.log(this.markers);
+      })
   }
 
   ngOnDestroy() {

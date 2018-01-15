@@ -55,7 +55,6 @@ import { LoginServiceProvider } from '../providers/login-service/login-service';
 
 // Directives
 import { HammertimeDirective } from '../assets/hammertime';
-import { AaaProvider } from '../providers/aaa/aaa';
 
 @NgModule({
   declarations: [
@@ -122,7 +121,6 @@ import { AaaProvider } from '../providers/aaa/aaa';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AaaProvider
   ]
 })
 export class AppModule {}

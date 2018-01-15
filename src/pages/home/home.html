@@ -37,13 +37,16 @@
       class="example-card"
       [@cardAnimator]="appointment.animationState"
       (@cardAnimator.done)="resetAnimationState(appointment)"
-      (swipeleft)="startAnimation(appointment, 'slideOutLeft')"
-      (swiperight)="startAnimation(appointment, 'zoomOutRight')"
+      (swipeleft)="startAnimation(appointment, 'swing')"
+      (swiperight)="startAnimation(appointment, 'jello')"
       (swipeup)="startAnimation(appointment, 'rotateOutUpRight')"
       (swipedown)="startAnimation(appointment, 'flipOutY')"
       (click)="openDetailsPage(appointment)">
 
       <img src="assets/imgs/salon1.jpg">
+      <ion-avatar item-left>
+        <img [src]="appointment.companyDetails.logoUrl">
+      </ion-avatar>
 
       <div class="header">
         <p>{{ markers[0]?.distance | number : '1.2-2' }} km</p>
@@ -56,16 +59,22 @@
       <h2 class="title">{{ appointment.companyDetails.title | titlecase }}</h2>
 
       <div ion-item class="info">
-        <p>Available: 16:00 - 18:00</p>
-        <button ion-button clear icon-only item-end (click)="like($event, appointment.companyDetails.companyId)" >
+
+        <p>
+          <span class="date">{{ appointment.startTime | date: 'dd MMM ' }}</span>
+          <span class="time">{{ appointment.startTime | date: 'HH:mm' }} - {{ appointment.endTime | date: 'HH:mm'}}</span>
+        </p>
+
+        <button ion-button clear icon-only item-end (click)="like($event, appointment)" >
           <ion-icon *ngIf="isFavorite(appointment.companyDetails.companyId)"  name="heart"></ion-icon>
           <ion-icon *ngIf="!isFavorite(appointment.companyDetails.companyId)"  name="heart-outline"></ion-icon>
         </button>
 
-        <button mat-raised-button color="primary" (tap)="startAnimation(appointment, 'wobble')">WOBBLE</button>
+        <!-- <button mat-raised-button color="primary" (tap)="startAnimation(appointment, 'wobble')">WOBBLE</button>
         <button mat-raised-button color="primary" (tap)="startAnimation(appointment, 'swing')">SWING</button>
 
         <button hammertime mat-raised-button color="accent" (doubleTap)="startAnimation(appointment, 'jello')">JELLO (doubleTap)</button>
+       -->
 
 
       </div>

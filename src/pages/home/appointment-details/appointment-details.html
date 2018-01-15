@@ -14,7 +14,10 @@
     <img src="assets/imgs/salon2.jpg" />
 
     <div padding id="price">
-      <p>Appointment starts 16:00</p>
+      <p>
+        <span class="date">{{ appointment.startTime | date: 'dd MMM' }}</span>
+        <span class="time"> {{ appointment.startTime | date: 'HH:mm' }} - {{ appointment.endTime | date: 'HH:mm' }}</span>
+      </p>
       <p>
         <span class="price">{{ appointment.price }}</span>
         <span class="discount">{{ appointment.discount }} DKK</span>

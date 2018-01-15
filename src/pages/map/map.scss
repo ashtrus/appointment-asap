@@ -9,7 +9,7 @@ page-map {
   }
 
   agm-map {
-    height: 90vh;
+    height: calc(100vh - 50px);
     width: 100vw;
   }
 
