@@ -17,6 +17,18 @@ page-appointment-details {
         p {
           font-weight: bold;
           margin: 0;
+
+          .discount {
+            font-weight: bold;
+            color: gold;
+          }
+
+          .price {
+            font-weight: normal;
+            text-decoration: line-through;
+            font-style: italic;
+          }
+
         }
       }
 

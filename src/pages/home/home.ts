@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ModalController, NavController } from 'ionic-angular';
 
 import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
@@ -9,6 +9,7 @@ import { SettingsPage } from './settings/settings';
 import { AppointmentDetailsPage } from './appointment-details/appointment-details';
 
 import { LoginServiceProvider } from "../../providers/login-service/login-service";
+import { MapServiceProvider } from '../../providers/map-service/map-service';
 import { Appointment } from '../../models/appointment';
 
 import { trigger, keyframes, animate, transition } from '@angular/animations';
@@ -29,15 +30,20 @@ import * as kf from '../../assets/animations';
     ])
   ]
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
   appointmentsRef: AngularFireList<any>;
   appointments: Observable<any[]>;
   likes: string[] = [];
 
+  lat: number;
+  lng: number;
+  markers: any;
+
   constructor(
     private afDB: AngularFireDatabase,
     private loginService: LoginServiceProvider,
+    private mapService: MapServiceProvider,
     public modalCtrl: ModalController,
     public navCtrl: NavController,
   ) {
@@ -53,6 +59,16 @@ export class HomePage {
     })
   }
 
+  ngOnInit() {
+    // FIXME: change to filters data
+    this.getUserLocation(15);
+    this.mapService.hits
+      .subscribe(hits => {
+        this.markers = hits
+        console.log(this.markers);
+      })
+  }
+
   private startAnimation(appointment, state) {
     if (!appointment.animationState) {
       appointment.animationState = state;
@@ -66,6 +82,18 @@ export class HomePage {
   private openFiltersModal() {
     let modal = this.modalCtrl.create(ModalFiltersPage);
     modal.present();
+  }
+
+  private getUserLocation(distance: number) {
+    /// locate the user
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        this.lat = position.coords.latitude;
+        this.lng = position.coords.longitude;
+
+        this.mapService.getLocations(distance, [this.lat, this.lng]);
+      });
+    }
   }
 
   private like(ev, companyId) {

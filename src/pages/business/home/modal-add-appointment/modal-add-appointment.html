@@ -21,7 +21,7 @@
   <ion-item>
     <ion-label>Start Time</ion-label>
     <ion-datetime [(ngModel)]="startTime"
-      displayFormat="DD MMM H:m"
+      displayFormat="DD MMM HH:mm"
       minuteValues="0,5,10,15,20,25,30,35,40,45,50,55">
     </ion-datetime>
   </ion-item>
@@ -29,7 +29,7 @@
   <ion-item>
     <ion-label>End Time</ion-label>
     <ion-datetime [(ngModel)]="endTime"
-      displayFormat="DD MMM H:m"
+      displayFormat="DD MMM HH:mm"
       minuteValues="0,5,10,15,20,25,30,35,40,45,50,55">
     </ion-datetime>
   </ion-item>
@@ -65,6 +65,16 @@
       <ion-input type="number" placeholder="Enter price"
         formControlName="price"
         [value]="selectedAppointment.price"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primary">
+        Discounted price
+      </ion-label>
+      <ion-input type="number" placeholder="Enter discounted price"
+        formControlName="discount"
+        [value]="selectedAppointment.discount"
       ></ion-input>
     </ion-item>
 

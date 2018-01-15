@@ -13,16 +13,36 @@ page-business-home {
           display: flex;
           justify-content: space-between;
           width: 100%;
-          bottom: 3.6em;
+          bottom: 4.9em;
           padding: 0.5em;
           background-color: rgba($color: #000000, $alpha: 0.6);
           p {
-            color: white!important;
+            color: gold;
+            font-weight: bold;
+            .discount {
+              font-weight: bold;
+              color: gold;
+            }
+
+            .price {
+              color: white;
+              font-weight: normal;
+              text-decoration: line-through;
+              font-style: italic;
+            }
+
+            .date {
+              color: white;
+              font-weight: bold;
+              font-size: 1.2em;
+            }
+            .time {
+            }
+
           }
         }
         .title {
           width: 100%;
-          text-align: center;
           font-size: 1em;
           font-weight: bold;
           margin-top: 0.5em;

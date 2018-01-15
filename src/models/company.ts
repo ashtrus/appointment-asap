@@ -5,5 +5,8 @@ export interface Company {
   title?: string;
   category?: string;
   logoUrl?: string;
-  branches?: Location[];
+  branches?: string[];
+  address?: string;
+  email?: string;
+  phone?: string;
 }

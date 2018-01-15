@@ -59,6 +59,7 @@ export class LoginServiceProvider {
         .signInWithPopup(new firebase.auth.FacebookAuthProvider())
         .then(res => {
           console.log(res);
+          this.updateUserData(res.user);
         });
     }
   }
@@ -139,6 +140,11 @@ export class LoginServiceProvider {
       logoUrl: companyData.logoUrl,
     }
     return companyRef.update(data);
+  }
+
+  deleteLocation(location) {
+    this.afDB.list(`locations/`).remove(location);
+    this.afDB.list(`companies/${this.getUser().uid}/locations`).remove();
   }
 
 }

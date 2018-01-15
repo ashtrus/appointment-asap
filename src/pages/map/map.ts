@@ -20,7 +20,7 @@ export class MapPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     // this.seedDatabase();
-    this.getUserLocation();
+    this.getUserLocation(15);
     this.subscription = this.mapService.hits
       .subscribe(hits => this.markers = hits)
   }
@@ -29,14 +29,14 @@ export class MapPage implements OnInit, OnDestroy {
     this.subscription.unsubscribe()
   }
 
-  private getUserLocation() {
+  private getUserLocation(distance) {
     /// locate the user
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
         this.lat = position.coords.latitude;
         this.lng = position.coords.longitude;
 
-        this.mapService.getLocations(15, [this.lat, this.lng]);
+        this.mapService.getLocations(distance, [this.lat, this.lng]);
       });
     }
   }
@@ -52,7 +52,7 @@ export class MapPage implements OnInit, OnDestroy {
     dummyPoints.forEach((val, idx) => {
       let name = `dummy-location-${idx}`
       console.log(idx)
-      this.mapService.setLocation(name, val)
+      this.mapService.setLocation(name, val, "")
     })
   }
 

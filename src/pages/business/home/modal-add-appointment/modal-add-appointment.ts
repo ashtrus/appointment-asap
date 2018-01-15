@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavParams, ViewController } from "ionic-angular";
+import { NavParams, ToastController, ViewController } from "ionic-angular";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 import { AngularFireList,  AngularFireDatabase} from 'angularfire2/database';
@@ -28,6 +28,7 @@ export class ModalAddAppointmentPage implements OnInit {
     private formBuilder: FormBuilder,
     private loginService: LoginServiceProvider,
     public navParams: NavParams,
+    public toastCtrl: ToastController,
     public viewCtrl: ViewController
   ) {
     this.appointmentsRef = afDB.list(`appointments/`);
@@ -42,6 +43,7 @@ export class ModalAddAppointmentPage implements OnInit {
       title: ["", Validators.required ],
       description: ["", Validators.required ],
       price: ["", Validators.required ],
+      discount: [""],
     });
   }
 
@@ -56,7 +58,7 @@ export class ModalAddAppointmentPage implements OnInit {
       this.editMode = false;
       this.startTime = new Date().toISOString()
       this.endTime = new Date(new Date().getTime() + (1 * 60 * 60 * 1000)).toISOString();
-      this.selectedAppointment = new Appointment("", "", "", "", "", "", this.startTime, this.endTime);
+      this.selectedAppointment = new Appointment("", "", "", "", "", "", "", this.startTime, this.endTime);
     }
   }
 
@@ -73,6 +75,7 @@ export class ModalAddAppointmentPage implements OnInit {
     this.selectedAppointment.title = this.createAppointmentForm.controls.title.value;
     this.selectedAppointment.description = this.createAppointmentForm.controls.description.value;
     this.selectedAppointment.price = this.createAppointmentForm.controls.price.value;
+    this.selectedAppointment.discount = this.createAppointmentForm.controls.discount.value;
 
     const companyDetails: any = this.company;
     companyDetails.companyId = this.getUser().uid;
@@ -84,9 +87,16 @@ export class ModalAddAppointmentPage implements OnInit {
         title: this.selectedAppointment.title,
         description: this.selectedAppointment.description,
         price: this.selectedAppointment.price,
+        discount: this.selectedAppointment.discount,
         startTime: this.startTime,
         endTime: this.endTime,
       });
+
+      let toast = this.toastCtrl.create({
+        message: 'Appointment was added successfully',
+        duration: 2000
+      });
+      toast.present();
 
     } else {
 
@@ -94,9 +104,17 @@ export class ModalAddAppointmentPage implements OnInit {
         title:        this.selectedAppointment.title,
         description:  this.selectedAppointment.description,
         price: this.selectedAppointment.price,
+        discount: this.selectedAppointment.discount,
         startTime: this.startTime,
         endTime: this.endTime,
       });
+
+      let toast = this.toastCtrl.create({
+        message: 'Appointment was updated successfully',
+        duration: 2000
+      });
+      toast.present();
+
     }
 
     this.createAppointmentForm.reset();

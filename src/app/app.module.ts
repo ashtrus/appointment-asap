@@ -1,5 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
@@ -15,7 +16,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 // Modules
 import { AgmCoreModule } from '@agm/core';
-import * as Hammer from 'hammerjs';
+import * as Hammer from "hammerjs";
 
 // Pages: for Business
 import { BusinessHomePage } from "../pages/business/home/home";
@@ -54,6 +55,7 @@ import { LoginServiceProvider } from '../providers/login-service/login-service';
 
 // Directives
 import { HammertimeDirective } from '../assets/hammertime';
+import { AaaProvider } from '../providers/aaa/aaa';
 
 @NgModule({
   declarations: [
@@ -85,6 +87,7 @@ import { HammertimeDirective } from '../assets/hammertime';
     AngularFireAuthModule,
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -118,7 +121,8 @@ import { HammertimeDirective } from '../assets/hammertime';
     LoginServiceProvider,
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AaaProvider
   ]
 })
 export class AppModule {}

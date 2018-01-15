@@ -25,7 +25,7 @@
     <ion-row nowrap id="categories">
 
       <div ion-col col-3 *ngFor="let appointment of appointments | async">
-        <img src="/assets/imgs/salon3.jpg" />
+        <img src="assets/imgs/salon3.jpg" />
         <h2>{{ appointment.title | titlecase }}</h2>
       </div>
 
@@ -43,11 +43,14 @@
       (swipedown)="startAnimation(appointment, 'flipOutY')"
       (click)="openDetailsPage(appointment)">
 
-      <img src="/assets/imgs/salon1.jpg">
+      <img src="assets/imgs/salon1.jpg">
 
       <div class="header">
-        <p>200 m</p>
-        <p>{{ appointment.price }} DKK</p>
+        <p>{{ markers[0]?.distance | number : '1.2-2' }} km</p>
+        <p>
+          <span class="price">{{ appointment.price }}</span>
+          <span class="discount">{{ appointment.discount }} DKK</span>
+        </p>
       </div>
 
       <h2 class="title">{{ appointment.companyTitle | titlecase }}</h2>
