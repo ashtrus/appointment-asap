@@ -25,16 +25,23 @@
     <h1>My appointments</h1>
     <ion-card *ngFor="let appointment of appointments | async">
 
-      <img src="/assets/imgs/salon1.jpg">
+      <img src="assets/imgs/salon1.jpg">
 
       <div class="header">
-        <p>{{ appointment.price }} DKK</p>
+        <p>
+          <span class="price">{{ appointment.price }}</span>
+          <span class="discount">{{ appointment.discount }} DKK</span>
+        </p>
+        <p>
+          <span class="date">{{ appointment.startTime | date: 'dd MMM ' }}</span>
+          <span class="time">{{ appointment.startTime | date: 'HH:mm' }} - {{ appointment.endTime | date: 'HH:mm'}}</span>
+        </p>
       </div>
 
-      <h2 class="title">{{ appointment.text | titlecase }}</h2>
-
       <div ion-item class="info">
-        <p>Available: 16:00 - 18:00</p>
+        <h2 class="title">{{ appointment.title | titlecase }}</h2>
+        <p>{{ appointment.description | titlecase }}</p>
+
         <button ion-button clear icon-only item-end color="light"
           (click)="update(appointment)">
           <ion-icon name="create"></ion-icon>

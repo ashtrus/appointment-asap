@@ -11,11 +11,14 @@
 
   <div id="top">
 
-    <img src="/assets/imgs/salon2.jpg" />
+    <img src="assets/imgs/salon2.jpg" />
 
     <div padding id="price">
       <p>Appointment starts 16:00</p>
-      <p>{{ appointment.price }} DKK</p>
+      <p>
+        <span class="price">{{ appointment.price }}</span>
+        <span class="discount">{{ appointment.discount }} DKK</span>
+      </p>
     </div>
 
   </div>
@@ -24,11 +27,11 @@
   <div padding id="description">
     <h1>{{ appointment.title }}</h1>
     <p>{{ appointment.description }}</p>
-    <p>CVR: {{ company.cvr }}</p>
+    <p>CVR: {{ appointment.companyDetails.cvr }}</p>
 
     <ion-item no-lines>
       <ion-icon name="navigate" color="primary" padding-right></ion-icon>
-      Address here:
+      {{ appointment?.companyDetails?.address }}
     </ion-item>
 
   </div>

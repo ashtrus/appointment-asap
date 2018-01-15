@@ -1,7 +1,7 @@
 import { Company } from "./company";
 
 export interface Location extends Company {
-  id: string;
+  id?: string;
   city?: string;
   address?: string;
   post?: string;

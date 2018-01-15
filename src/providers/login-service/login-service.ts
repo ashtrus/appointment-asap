@@ -60,6 +60,7 @@ export class LoginServiceProvider {
         .signInWithPopup(new firebase.auth.FacebookAuthProvider())
         .then(res => {
           console.log(res);
+          this.updateUserData(res.user);
         });
     }
   }
@@ -143,6 +144,11 @@ export class LoginServiceProvider {
   getCategories() {
     const categoryRef: AngularFireList<string> = this.afDB.list(`categories/`);
     return this.categories = categoryRef.valueChanges();
+  }
+
+  deleteLocation(location) {
+    this.afDB.list(`locations/`).remove(location);
+    this.afDB.list(`companies/${this.getUser().uid}/locations`).remove();
   }
 
 }
