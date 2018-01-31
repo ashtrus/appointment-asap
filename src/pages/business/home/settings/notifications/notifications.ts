@@ -12,7 +12,7 @@ export class NotificationSettingsPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad NotificationsPage');
+    // console.log('ionViewDidLoad NotificationsPage');
   }
 
 }

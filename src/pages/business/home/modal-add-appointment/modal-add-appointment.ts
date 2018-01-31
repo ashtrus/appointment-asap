@@ -34,7 +34,6 @@ export class ModalAddAppointmentPage implements OnInit {
     this.appointmentsRef = afDB.list(`appointments/`);
     this.loginService.company.subscribe(company => {
       this.company = company;
-      console.log(company);
     });
   }
 

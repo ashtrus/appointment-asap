@@ -88,6 +88,7 @@ export class LoginServiceProvider {
       .signInWithEmailAndPassword(email, password)
       .then(res => {
         console.log(res);
+        this.addCompanyDetailsToDb(res);
       })
   }
 
@@ -126,6 +127,16 @@ export class LoginServiceProvider {
     userRef.update({ likes: newLikes });
   }
 
+
+  addCompanyDetailsToDb(companyData) {
+    const companyRef: AngularFireObject<any> = this.afDB.object(`companies/${companyData.uid}`);
+
+    const data = {
+      uid: companyData.uid,
+      email: companyData.email,
+    }
+    return companyRef.update(data);
+  }
 
   updateCompanyData(companyData) {
     // Sets user data to firebase on login

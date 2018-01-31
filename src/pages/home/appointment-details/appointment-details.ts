@@ -49,18 +49,21 @@ export class AppointmentDetailsPage {
         {
           text: 'Yes',
           handler: () => {
-            console.log('Yes clicked');
 
             this.loginService.user.subscribe((user) => {
 
               // FIXME: not all data necessary only contacts and photo, phone as well
               this.receipt.user = user;
 
-      this.afDB.list('/receipts').push(this.receipt).then(() => {
-        // FIXME: remove when booking system entirely fixed
-        // this.afDB.list('/appointments').remove(appointment.key);
-        this.navCtrl.setRoot(UserReceiptsPage);
-      })
+              this.afDB.list('/receipts').push(this.receipt).then(() => {
+                // FIXME: remove when booking system entirely fixed
+                this.afDB.list('/appointments').remove(appointment.key);
+                this.navCtrl.setRoot(UserReceiptsPage);
+              })
+            });
+          }
+        }
+      ]
     });
     confirm.present();
 

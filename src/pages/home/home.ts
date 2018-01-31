@@ -11,6 +11,7 @@ import { AppointmentDetailsPage } from './appointment-details/appointment-detail
 import { LoginServiceProvider } from "../../providers/login-service/login-service";
 import { MapServiceProvider } from '../../providers/map-service/map-service';
 import { Appointment } from '../../models/appointment';
+import { Filter } from '../../models/filter';
 
 import { trigger, keyframes, animate, transition } from '@angular/animations';
 import * as kf from '../../assets/animations';
@@ -35,6 +36,7 @@ export class HomePage implements OnInit {
   appointmentsRef: AngularFireList<any>;
   appointments: Observable<any[]>;
   likes: string[] = [];
+  filters: Filter
   categories: string[];
 
   lat: number;
@@ -56,7 +58,13 @@ export class HomePage implements OnInit {
     });
 
     this.loginService.user.subscribe(user => {
-      if (user.likes) { this.likes = user.likes; }
+      if (user.likes) {
+        this.likes = user.likes;
+        this.filters = user.filters;
+        console.log(this.filters);
+        this.getUserLocation(user.filters.distance);
+
+      }
     })
 
     this.loginService.getCategories().subscribe((c) => {
@@ -66,11 +74,10 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     // FIXME: change to filters data
-    this.getUserLocation(50);
+    // const distance = this.filters.distance;
     this.mapService.hits
       .subscribe(hits => {
         this.markers = hits
-        console.log(this.markers);
       })
   }
 

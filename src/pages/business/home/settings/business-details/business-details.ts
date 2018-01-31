@@ -45,7 +45,7 @@ export class BusinessDetailsPage implements OnInit {
       title: ["", Validators.required],
       category: ["", Validators.required],
       logoUrl: [""],
-      address: [""],
+      address: ["", Validators.required],
       email: [""],
       phone: [""]
     });
@@ -67,26 +67,42 @@ export class BusinessDetailsPage implements OnInit {
 
     const companyId = this.getUser().uid;
 
-    this.mapService.getCoordinates(this.company.address, this.company).subscribe((location) => {
+    if (this.updateCompanyDetailsForm.controls.address.touched) {
 
-      this.companyRef.update(companyId, {
-        cvr: this.company.cvr,
-        title: this.company.title,
-        category: this.company.category,
-        logoUrl: this.company.logoUrl,
-        address: this.company.address,
-        email: this.company.email,
-        phone: this.company.phone,
-      });
+      this.mapService.getCoordinates(this.company.address, this.company).subscribe((location) => {
 
-      this.branches.forEach(location => {
-        this.loginService.deleteLocation(location);
-      });
+        this.companyRef.update(companyId, {
+          cvr: this.company.cvr,
+          title: this.company.title,
+          category: this.company.category,
+          logoUrl: this.company.logoUrl,
+          address: this.company.address,
+          email: this.company.email,
+          phone: this.company.phone,
+        });
 
-    })
+        this.branches.forEach(location => {
+          this.loginService.deleteLocation(location);
+        });
+      })
 
+    } else {
+      this.updateWithoutAddress();
+    }
 
     this.navCtrl.pop();
   }
 
+  private updateWithoutAddress() {
+    const companyId = this.getUser().uid;
+
+    this.companyRef.update(companyId, {
+      cvr: this.company.cvr,
+      title: this.company.title,
+      category: this.company.category,
+      logoUrl: this.company.logoUrl,
+      email: this.company.email,
+      phone: this.company.phone,
+    });
+  }
 }

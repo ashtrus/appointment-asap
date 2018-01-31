@@ -30,7 +30,6 @@ export class MapServiceProvider {
   public setLocation(key: string, coords: Array<number>, company) {
     this.geoFire.set(key, coords)
       .then(_ => {
-        console.log('location updated');
         this.dbRef.update(key, { 'company': company});
         this.branchesRef.push(key);
       })
@@ -50,7 +49,6 @@ export class MapServiceProvider {
         distance: distance
       }
       let currentHits = this.hits.value
-      console.log(hit, currentHits);
       currentHits.push(hit)
       this.hits.next(currentHits)
     })
@@ -59,7 +57,6 @@ export class MapServiceProvider {
   getCoordinates(address, company) {
     return this.http.get(`${GMAPS_API_URL_GEO}?address=${address}&key=${GOOGLE_MAPS_API_KEY}`)
       .map(res => {
-        console.log(res);
         const locationObj = res.results[0].geometry.location;
         const locationArr:number[] = [];
         locationArr.push(locationObj.lat);
